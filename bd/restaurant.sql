@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 11, 2020 at 06:26 PM
+-- Generation Time: Sep 11, 2020 at 07:53 PM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -56,6 +56,7 @@ CREATE TABLE `menus` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL DEFAULT 1,
   `name` varchar(255) NOT NULL,
+  `slug` varchar(191) NOT NULL,
   `details` text NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
@@ -65,10 +66,10 @@ CREATE TABLE `menus` (
 -- Dumping data for table `menus`
 --
 
-INSERT INTO `menus` (`id`, `user_id`, `name`, `details`, `created`, `modified`) VALUES
-(1, 1, 'Pizza', 'A delicious pizza', '2020-09-11 13:23:26', '2020-09-11 13:23:26'),
-(2, 1, 'Burger', 'A tasty burger', '2020-09-11 13:23:52', '2020-09-11 13:23:52'),
-(3, 2, 'Test', 'A test from the admin', '2020-09-11 13:24:27', '2020-09-11 13:24:27');
+INSERT INTO `menus` (`id`, `user_id`, `name`, `slug`, `details`, `created`, `modified`) VALUES
+(1, 1, 'Pizza', 'pizza', 'A delicious pizza', '2020-09-11 13:23:26', '2020-09-11 13:23:26'),
+(2, 1, 'Burger', 'burger', 'A tasty burger', '2020-09-11 13:23:52', '2020-09-11 13:23:52'),
+(3, 2, 'Test', 'test', 'A test from the admin', '2020-09-11 13:24:27', '2020-09-11 13:24:27');
 
 -- --------------------------------------------------------
 
