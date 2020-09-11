@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 11, 2020 at 05:45 PM
+-- Generation Time: Sep 11, 2020 at 06:26 PM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -30,27 +30,21 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `price` double NOT NULL DEFAULT 0,
   `details` text NOT NULL,
-  `erase` tinyint(4) NOT NULL DEFAULT 0,
-  `menu_id` int(11) NOT NULL
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `name`, `price`, `details`, `erase`, `menu_id`) VALUES
-(1, 'Fromage chédar', 2.5, '350g de fromage chédar coupé en tranche', 0, 1),
-(2, 'Sauce tomate', 0.99, '100ml de sauce tomate fait maison', 0, 1),
-(6, 'Steak', 99.08, 'Un bon steak', 0, 3),
-(7, 'Sauce BBQ', 123.01, 'De la sauce maison BBQ', 0, 3),
-(11, 'Bacon', 10, 'Bacon', 0, 3),
-(12, 'Fromage chédar', 12.99, 'Du fromage chédar', 0, 2),
-(18, 'Fromage chédar', 12.99, 'Du fromage chédar', 1, 3),
-(19, 'Boeuf', 30.99, 'Morceaux de viande de bœuf', 0, 8),
-(20, 'Champignon', 2.5, 'Des champignons', 0, 8);
+INSERT INTO `items` (`id`, `menu_id`, `name`, `price`, `details`, `created`, `modified`) VALUES
+(1, 1, 'Cheese', 0.2, 'One hell of a cheese', '2020-09-11 13:25:28', '2020-09-11 13:25:28'),
+(2, 3, 'Test', 0, 'A test from the admin', '2020-09-11 13:26:08', '2020-09-11 13:26:08');
 
 -- --------------------------------------------------------
 
@@ -60,24 +54,21 @@ INSERT INTO `items` (`id`, `name`, `price`, `details`, `erase`, `menu_id`) VALUE
 
 CREATE TABLE `menus` (
   `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 1,
   `name` varchar(255) NOT NULL,
-  `date_start` date NOT NULL,
-  `date_end` date NOT NULL,
   `details` text NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT 1
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `menus`
 --
 
-INSERT INTO `menus` (`id`, `name`, `date_start`, `date_end`, `details`, `email`, `user_id`) VALUES
-(1, 'Lasagne Bolognaise', '2020-02-13', '2020-02-14', 'Une lasagne à la sauce tomate, soupoudrée de fromage chédar et de bacon', 'antoine.laboissiere@gmail.com', 1),
-(2, 'Pizza Québécoise', '2020-02-27', '2020-02-28', 'Trois fromages, pizza de la belle province du Québec', 'antoine.laboissiere@gmail.com', 1),
-(3, 'Hamburger Steak', '2020-04-30', '2020-04-29', 'Un burger américain à la sauce BBQ et soupoudré de bacons', 'antoine.laboissiere@gmail.com', 1),
-(8, 'Boeuf Bourguignon', '2020-05-10', '2020-05-29', 'Le bœuf bourguignon est une recette de cuisine d\'estouffade de bœuf, traditionnelle de la cuisine bourguignonne, cuisinée au vin rouge de Bourgogne, avec une garniture de champignons, de petits oignons et de lardons.', 'antoine.laboissiere@gmail.com', 1),
-(14, 'Un menu d\'un autre utilisateur', '2020-05-11', '2020-05-29', 'Menu de André Pilon', 'prof@prof.com', 3);
+INSERT INTO `menus` (`id`, `user_id`, `name`, `details`, `created`, `modified`) VALUES
+(1, 1, 'Pizza', 'A delicious pizza', '2020-09-11 13:23:26', '2020-09-11 13:23:26'),
+(2, 1, 'Burger', 'A tasty burger', '2020-09-11 13:23:52', '2020-09-11 13:23:52'),
+(3, 2, 'Test', 'A test from the admin', '2020-09-11 13:24:27', '2020-09-11 13:24:27');
 
 -- --------------------------------------------------------
 
@@ -88,18 +79,19 @@ INSERT INTO `menus` (`id`, `name`, `date_start`, `date_end`, `details`, `email`,
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `login` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `login`, `password`) VALUES
-(1, 'Antoine La Boissière', 'alaboissiere', 'etudiant'),
-(2, 'Administrateur', 'admin', 'admin'),
-(3, 'André Pilon', 'apilon', 'prof');
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `created`, `modified`) VALUES
+(1, 'Antoine La Boissière', 'antoine.laboissiere@gmail.com', 'anTo2inE5', '2020-09-11 13:21:37', '2020-09-11 13:21:37'),
+(2, 'Admin', 'admin@gmail.com', 'root', '2020-09-11 13:22:24', '2020-09-11 13:22:24');
 
 --
 -- Indexes for dumped tables
