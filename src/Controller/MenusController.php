@@ -1,83 +1,111 @@
 <?php
-
-// Controlleur Menus
 namespace App\Controller;
+
 use App\Controller\AppController;
 
+/**
+ * Menus Controller
+ *
+ * @property \App\Model\Table\MenusTable $Menus
+ *
+ * @method \App\Model\Entity\Menu[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ */
 class MenusController extends AppController
 {
-    // Initialiser les composants
-    public function initialize(): void
-    {
-        parent::initialize();
-
-        $this->loadComponent('Paginator');
-        $this->loadComponent('Flash'); // Include the FlashComponent
-    }
-
-    // Table des menus
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null
+     */
     public function index()
     {
-        $this->loadComponent('Paginator');
-        $menus = $this->Paginator->paginate($this->Menus->find());
+        $this->paginate = [
+            'contain' => ['Users'],
+        ];
+        $menus = $this->paginate($this->Menus);
+
         $this->set(compact('menus'));
     }
 
-    // Pour un seul menu
-    public function view($slug = null)
+    /**
+     * View method
+     *
+     * @param string|null $id Menu id.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function view($id = null)
     {
-        $menu = $this->Menus->findBySlug($slug)->firstOrFail();
-        $this->set(compact('menu'));
+        $menu = $this->Menus->get($id, [
+            'contain' => ['Users', 'Items'],
+        ]);
+
+        $this->set('menu', $menu);
     }
 
-    // Pour ajouter un menu
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
     public function add()
     {
         $menu = $this->Menus->newEntity();
         if ($this->request->is('post')) {
             $menu = $this->Menus->patchEntity($menu, $this->request->getData());
-
-            // Hardcoding the user_id is temporary, and will be removed later
-            // when we build authentication out.
-            $menu->user_id = 1;
-
             if ($this->Menus->save($menu)) {
-                $this->Flash->success(__('Your menu has been saved.'));
+                $this->Flash->success(__('The menu has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to add your menu.'));
+            $this->Flash->error(__('The menu could not be saved. Please, try again.'));
         }
-        $this->set('menu', $menu);
+        $users = $this->Menus->Users->find('list', ['limit' => 200]);
+        $this->set(compact('menu', 'users'));
     }
 
-    // Modifier un menu
-    public function edit($slug)
+    /**
+     * Edit method
+     *
+     * @param string|null $id Menu id.
+     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function edit($id = null)
     {
-        $menu = $this->Menus
-            ->findBySlug($slug)
-            ->firstOrFail();
-
-        if ($this->request->is(['post', 'put'])) {
-            $this->Menus->patchEntity($menu, $this->request->getData());
+        $menu = $this->Menus->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $menu = $this->Menus->patchEntity($menu, $this->request->getData());
             if ($this->Menus->save($menu)) {
-                $this->Flash->success(__('Your menu has been updated.'));
+                $this->Flash->success(__('The menu has been saved.'));
+
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('Unable to update your menu.'));
+            $this->Flash->error(__('The menu could not be saved. Please, try again.'));
         }
-
-        $this->set('menu', $menu);
+        $users = $this->Menus->Users->find('list', ['limit' => 200]);
+        $this->set(compact('menu', 'users'));
     }
 
-    // Supprimer un menu
-    public function delete($slug)
+    /**
+     * Delete method
+     *
+     * @param string|null $id Menu id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-
-        $menu = $this->Menus->findBySlug($slug)->firstOrFail();
+        $menu = $this->Menus->get($id);
         if ($this->Menus->delete($menu)) {
-            $this->Flash->success(__('{0} menu has been deleted.', $menu->name));
-            return $this->redirect(['action' => 'index']);
+            $this->Flash->success(__('The menu has been deleted.'));
+        } else {
+            $this->Flash->error(__('The menu could not be deleted. Please, try again.'));
         }
+
+        return $this->redirect(['action' => 'index']);
     }
 }
