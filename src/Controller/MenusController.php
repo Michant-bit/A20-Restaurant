@@ -49,4 +49,35 @@ class MenusController extends AppController
         }
         $this->set('menu', $menu);
     }
+
+    // Modifier un menu
+    public function edit($slug)
+    {
+        $menu = $this->Menus
+            ->findBySlug($slug)
+            ->firstOrFail();
+
+        if ($this->request->is(['post', 'put'])) {
+            $this->Menus->patchEntity($menu, $this->request->getData());
+            if ($this->Menus->save($menu)) {
+                $this->Flash->success(__('Your menu has been updated.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to update your menu.'));
+        }
+
+        $this->set('menu', $menu);
+    }
+
+    // Supprimer un menu
+    public function delete($slug)
+    {
+        $this->request->allowMethod(['post', 'delete']);
+
+        $menu = $this->Menus->findBySlug($slug)->firstOrFail();
+        if ($this->Menus->delete($menu)) {
+            $this->Flash->success(__('{0} menu has been deleted.', $menu->name));
+            return $this->redirect(['action' => 'index']);
+        }
+    }
 }
