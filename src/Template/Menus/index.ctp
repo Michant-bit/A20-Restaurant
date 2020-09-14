@@ -1,3 +1,5 @@
+<?= $this->Html->link('Add Menu', ['action' => 'add']) ?>
+
 <table>
     <tr>
         <th>ID</th>
@@ -5,8 +7,6 @@
         <th>Details</th>
         <th>Created</th>
     </tr>
-
-    <!-- Change title for name -->
 
     <?php foreach ($menus as $menu): ?>
     <tr>
