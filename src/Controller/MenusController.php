@@ -53,6 +53,7 @@ class MenusController extends AppController
         $menu = $this->Menus->newEntity();
         if ($this->request->is('post')) {
             $menu = $this->Menus->patchEntity($menu, $this->request->getData());
+            $menu->user_id = $this->Auth->user('id');
             if ($this->Menus->save($menu)) {
                 $this->Flash->success(__('The menu has been saved.'));
 
@@ -71,22 +72,25 @@ class MenusController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($slug)
     {
-        $menu = $this->Menus->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $menu = $this->Menus->patchEntity($menu, $this->request->getData());
-            if ($this->Menus->save($menu)) {
-                $this->Flash->success(__('The menu has been saved.'));
+        $menu = $this->Menus
+            ->findBySlug($slug)
+            ->contain('Tags') // load associated Tags
+            ->firstOrFail();
 
+        if ($this->request->is(['post', 'put'])) {
+            $this->Menus->patchEntity($menu, $this->request->getData(), [
+                // Added: Disable modification of user_id.
+                'accessibleFields' => ['user_id' => false]
+            ]);
+            if ($this->Menus->save($menu)) {
+                $this->Flash->success(__('Your menu has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The menu could not be saved. Please, try again.'));
+            $this->Flash->error(__('Unable to update your menu.'));
         }
-        $users = $this->Menus->Users->find('list', ['limit' => 200]);
-        $this->set(compact('menu', 'users'));
+        $this->set('menu', $menu);
     }
 
     /**
@@ -107,5 +111,25 @@ class MenusController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // The add and tags actions are always allowed to logged in users.
+        if (in_array($action, ['add', 'tags'])) {
+            return true;
+        }
+
+        // All other actions require a slug.
+        $slug = $this->request->getParam('pass.0');
+        if (!$slug) {
+            return false;
+        }
+
+        // Check that the menu belongs to the current user.
+        $menu = $this->Menus->findById($slug)->first();
+
+        return $menu->user_id === $user['id'];
     }
 }
