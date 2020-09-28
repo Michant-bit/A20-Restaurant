@@ -14,11 +14,19 @@
     </ul>
 </nav>
 <div class="users view large-9 medium-8 columns content">
-    <h3><?= h($user->username) ?></h3>
+    <h3><?= h($user->username) ?> </h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= h($user->id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Grade') ?></th>
+            <td><?= h($user->grade) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Username') ?></th>
+            <td><?= h($user->username) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Email') ?></th>
@@ -27,10 +35,6 @@
         <tr>
             <th scope="row"><?= __('Password') ?></th>
             <td><?= h($user->password) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -47,7 +51,6 @@
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('User Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
                 <th scope="col"><?= __('Slug') ?></th>
                 <th scope="col"><?= __('Details') ?></th>
@@ -58,7 +61,6 @@
             <?php foreach ($user->menus as $menus): ?>
             <tr>
                 <td><?= h($menus->id) ?></td>
-                <td><?= h($menus->user_id) ?></td>
                 <td><?= h($menus->name) ?></td>
                 <td><?= h($menus->slug) ?></td>
                 <td><?= h($menus->details) ?></td>

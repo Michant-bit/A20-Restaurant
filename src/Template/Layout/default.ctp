@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'CakePHP: the rapid development php framework';
+$cakeDescription = 'Création de menus - Restauration';
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,13 +38,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
+                <h1><a href="">Création de menus</a></h1>
             </li>
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <li><a target="_blank" href="https://book.cakephp.org/3/">Documentation</a></li>
-                <li><a target="_blank" href="https://api.cakephp.org/3.0/">API</a></li>
+                <li><?= $this->Html->link(__('Login'), ['action' => '../users/login']) ?></li>
+                <li><?= $this->Html->link(__('Logout'), ['action' => '../users/logout']) ?></li>
             </ul>
         </div>
     </nav>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 11, 2020 at 07:53 PM
+-- Generation Time: Sep 21, 2020 at 08:36 PM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -67,7 +67,7 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `user_id`, `name`, `slug`, `details`, `created`, `modified`) VALUES
-(1, 1, 'Pizza', 'pizza', 'A delicious pizza', '2020-09-11 13:23:26', '2020-09-11 13:23:26'),
+(1, 1, 'Pizza', 'pizza', 'A delicious pizza', '2020-09-11 13:23:26', '2020-09-14 15:02:00'),
 (2, 1, 'Burger', 'burger', 'A tasty burger', '2020-09-11 13:23:52', '2020-09-11 13:23:52'),
 (3, 2, 'Test', 'test', 'A test from the admin', '2020-09-11 13:24:27', '2020-09-11 13:24:27');
 
@@ -79,6 +79,7 @@ INSERT INTO `menus` (`id`, `user_id`, `name`, `slug`, `details`, `created`, `mod
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `grade` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -90,9 +91,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created`, `modified`) VALUES
-(1, 'Antoine La Boissière', 'antoine.laboissiere@gmail.com', 'anTo2inE5', '2020-09-11 13:21:37', '2020-09-11 13:21:37'),
-(2, 'Admin', 'admin@gmail.com', 'root', '2020-09-11 13:22:24', '2020-09-11 13:22:24');
+INSERT INTO `users` (`id`, `grade`, `username`, `email`, `password`, `created`, `modified`) VALUES
+(1, 'author', 'Antoine La Boissière', 'antoine.laboissiere@gmail.com', '$2y$10$RwnCzY5StK.O2RFY8YOc6O/PkFH8mUavghTcQBbj/hr3IyVsXoTaC', '2020-09-11 13:21:37', '2020-09-14 18:38:25'),
+(2, 'administrator', 'Admin', 'admin@gmail.com', '$2y$10$ri97XUBCGa8.vmj0R..u8.i6e/fxJ/UwCtEzr2pFoDrghB/XjWeWe', '2020-09-11 13:22:24', '2020-09-14 18:44:59');
 
 --
 -- Indexes for dumped tables
@@ -132,7 +133,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
