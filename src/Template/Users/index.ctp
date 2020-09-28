@@ -10,6 +10,7 @@
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
         <hr>
         <li class="heading"><?= __('All lists') ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Menus'), ['controller' => 'Menus', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Items'), ['controller' => 'Items', 'action' => 'index']) ?></li>
     </ul>

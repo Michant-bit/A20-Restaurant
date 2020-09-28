@@ -43,8 +43,17 @@ $cakeDescription = 'Création de menus - Restauration';
         </ul>
         <div class="top-bar-section">
             <ul class="right">
-                <li><?= $this->Html->link(__('Login'), ['action' => '../users/login']) ?></li>
-                <li><?= $this->Html->link(__('Logout'), ['action' => '../users/logout']) ?></li>
+                <li>
+                    <?php
+                        $loguser = $this->request->session()->read('Auth.User');
+                        if($loguser){
+                            $user = $loguser['username'];
+                            echo $this->Html->link(__($user . ' [Logout]'), ['controller' => 'Users', 'action' => 'logout']);
+                        } else {
+                            echo $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
+                        }
+                    ?>
+                </li>
             </ul>
         </div>
     </nav>
