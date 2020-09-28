@@ -127,4 +127,31 @@ class UsersController extends AppController
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
     }
+
+    public function isAuthorized($user)
+    {
+        $action = $this->request->getParam('action');
+        // The add and tags actions are always allowed to logged in users.
+        if (in_array($action, ['add', 'tags'])) {
+            return true;
+        }
+
+        // All other actions require a id.
+        $id = $this->request->getParam('pass.0');
+        if (!$id) {
+            return false;
+        }
+
+        // Check that the menu belongs to the current user.
+        $newUser = $this->Users->findById($id)->first();
+
+        $validator = false;
+        
+        if($newUser->id === $user['id']){
+            $validator = true;
+        } else if($user['grade'] === "administrator") {
+            $validator = true;
+        }
+        return $validator;
+    }
 }
