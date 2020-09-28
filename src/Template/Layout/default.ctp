@@ -14,7 +14,7 @@
  * @var \App\View\AppView $this
  */
 
-$cakeDescription = 'Création de menus - Restauration';
+$cakeDescription = 'Restaurant';
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,11 +38,20 @@ $cakeDescription = 'Création de menus - Restauration';
     <nav class="top-bar expanded" data-topbar role="navigation">
         <ul class="title-area large-3 medium-4 columns">
             <li class="name">
-                <h1><a href="">Création de menus</a></h1>
+                <h1><a href=""><?=__('Menus Creation')?></a></h1>
             </li>
         </ul>
         <div class="top-bar-section">
             <ul class="right">
+                <li>
+                    <?= $this->Html->link('Français', ['action' => 'changeLang', 'fr_CA'], ['escape' => false]);?>
+                </li>
+                <li>
+                    <?= $this->Html->link('English', ['action' => 'changeLang', 'en_CA'], ['escape' => false]);?>
+                </li>
+                <li>
+                    <?= $this->Html->link('Español', ['action' => 'changeLang', 'es_ES'], ['escape' => false]);?>
+                </li>
                 <li>
                     <?php
                         $loguser = $this->request->session()->read('Auth.User');

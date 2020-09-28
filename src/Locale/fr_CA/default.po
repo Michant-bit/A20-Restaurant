@@ -1,0 +1,620 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-09-28 19:16+0000\n"
+"PO-Revision-Date: 2020-09-28 15:29-0400\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Language: fr_CA\n"
+
+#: Controller/ItemsController.php:59
+msgid "Item must be added from a menu"
+msgstr ""
+
+#: Controller/ItemsController.php:68 Controller/ItemsController.php:94
+msgid "The item has been saved."
+msgstr ""
+
+#: Controller/ItemsController.php:72 Controller/ItemsController.php:98
+msgid "The item could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/ItemsController.php:116
+msgid "The item has been deleted."
+msgstr ""
+
+#: Controller/ItemsController.php:118
+msgid "The item could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/MenusController.php:58
+msgid "The menu has been saved."
+msgstr ""
+
+#: Controller/MenusController.php:62
+msgid "The menu could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/MenusController.php:88
+msgid "Your menu has been updated."
+msgstr ""
+
+#: Controller/MenusController.php:91
+msgid "Unable to update your menu."
+msgstr ""
+
+#: Controller/MenusController.php:108
+msgid "The menu has been deleted."
+msgstr ""
+
+#: Controller/MenusController.php:110
+msgid "The menu could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:54 Controller/UsersController.php:78
+msgid "The user has been saved."
+msgstr ""
+
+#: Controller/UsersController.php:58 Controller/UsersController.php:82
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:99
+msgid "The user has been deleted."
+msgstr ""
+
+#: Controller/UsersController.php:101
+msgid "The user could not be deleted. Please, try again."
+msgstr ""
+
+#: Template/Items/add.ctp:9 Template/Items/edit.ctp:9
+#: Template/Items/index.ctp:9 Template/Items/index.ctp:28
+#: Template/Items/view.ctp:9 Template/Menus/add.ctp:11
+#: Template/Menus/edit.ctp:9 Template/Menus/index.ctp:9
+#: Template/Menus/index.ctp:29 Template/Menus/view.ctp:9
+#: Template/Menus/view.ctp:65 Template/Users/add.ctp:9
+#: Template/Users/edit.ctp:9 Template/Users/index.ctp:9
+#: Template/Users/index.ctp:30 Template/Users/login.ctp:3
+#: Template/Users/view.ctp:9 Template/Users/view.ctp:59
+msgid "Actions"
+msgstr "Commandes"
+
+#: Template/Items/add.ctp:10 Template/Items/index.ctp:14
+#: Template/Menus/index.ctp:15 Template/Users/index.ctp:15
+msgid "List Items"
+msgstr "Liste des items"
+
+#: Template/Items/add.ctp:11 Template/Items/index.ctp:13
+#: Template/Menus/index.ctp:14 Template/Users/index.ctp:14
+msgid "List Menus"
+msgstr "Liste des menus"
+
+#: Template/Items/add.ctp:12 Template/Menus/index.ctp:10
+msgid "New Menu"
+msgstr "Nouveau menu"
+
+#: Template/Items/add.ctp:18
+msgid "Add Item"
+msgstr "Nouvel item"
+
+#: Template/Items/add.ctp:25 Template/Items/edit.ctp:25
+#: Template/Menus/add.ctp:25 Template/Menus/edit.ctp:23
+#: Template/Users/add.ctp:24 Template/Users/edit.ctp:24
+#: View/Helper/FormHelper.php:2036
+msgid "Submit"
+msgstr "Appliquer"
+
+#: Template/Items/edit.ctp:11 Template/Items/view.ctp:13
+#: Template/Menus/add.ctp:13 Template/Menus/edit.ctp:11
+#: Template/Menus/view.ctp:14 Template/Users/add.ctp:11
+#: Template/Users/edit.ctp:11 Template/Users/view.ctp:13
+msgid "Return"
+msgstr "Retour"
+
+#: Template/Items/edit.ctp:17 Template/Items/view.ctp:10
+msgid "Edit Item"
+msgstr "Modifier l'item"
+
+#: Template/Items/index.ctp:11 Template/Menus/index.ctp:12
+#: Template/Users/index.ctp:12
+msgid "All lists"
+msgstr "Toutes les listes"
+
+#: Template/Items/index.ctp:12 Template/Menus/index.ctp:13
+#: Template/Users/index.ctp:13
+msgid "List Users"
+msgstr "Liste des utilisateurs"
+
+#: Template/Items/index.ctp:18
+msgid "Items"
+msgstr "Items"
+
+#: Template/Items/index.ctp:41 Template/Menus/index.ctp:42
+#: Template/Menus/view.ctp:77 Template/Users/index.ctp:44
+#: Template/Users/view.ctp:70 View/Helper/PaginatorHelper.php:1273
+msgid "View"
+msgstr ""
+
+#: Template/Items/index.ctp:42 Template/Menus/index.ctp:43
+#: Template/Menus/view.ctp:78 Template/Users/index.ctp:45
+#: Template/Users/view.ctp:71
+msgid "Edit"
+msgstr ""
+
+#: Template/Items/index.ctp:43 Template/Menus/index.ctp:44
+#: Template/Menus/view.ctp:79 Template/Users/index.ctp:46
+#: Template/Users/view.ctp:72
+msgid "Delete"
+msgstr ""
+
+#: Template/Items/index.ctp:43 Template/Items/view.ctp:11
+#: Template/Menus/view.ctp:79 Template/Users/view.ctp:72
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Template/Items/index.ctp:51 Template/Menus/index.ctp:52
+#: Template/Users/index.ctp:54
+msgid "first"
+msgstr ""
+
+#: Template/Items/index.ctp:52 Template/Menus/index.ctp:53
+#: Template/Users/index.ctp:55
+msgid "previous"
+msgstr ""
+
+#: Template/Items/index.ctp:54 Template/Menus/index.ctp:55
+#: Template/Users/index.ctp:57
+msgid "next"
+msgstr ""
+
+#: Template/Items/index.ctp:55 Template/Menus/index.ctp:56
+#: Template/Users/index.ctp:58
+msgid "last"
+msgstr ""
+
+#: Template/Items/index.ctp:57 Template/Menus/index.ctp:58
+#: Template/Users/index.ctp:60
+msgid ""
+"Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} "
+"total"
+msgstr ""
+
+#: Template/Items/view.ctp:11
+msgid "Delete Item"
+msgstr ""
+
+#: Template/Items/view.ctp:20
+msgid "Menu"
+msgstr ""
+
+#: Template/Items/view.ctp:24 Template/Menus/view.ctp:29
+#: Template/Menus/view.ctp:60 Template/Users/view.ctp:54
+msgid "Name"
+msgstr ""
+
+#: Template/Items/view.ctp:28 Template/Menus/view.ctp:37
+#: Template/Menus/view.ctp:58 Template/Users/view.ctp:20
+#: Template/Users/view.ctp:53
+msgid "Id"
+msgstr ""
+
+#: Template/Items/view.ctp:32 Template/Menus/view.ctp:61
+msgid "Price"
+msgstr ""
+
+#: Template/Items/view.ctp:36 Template/Menus/view.ctp:41
+#: Template/Menus/view.ctp:63 Template/Users/view.ctp:40
+#: Template/Users/view.ctp:57
+msgid "Created"
+msgstr ""
+
+#: Template/Items/view.ctp:40 Template/Menus/view.ctp:45
+#: Template/Menus/view.ctp:64 Template/Users/view.ctp:44
+#: Template/Users/view.ctp:58
+msgid "Modified"
+msgstr ""
+
+#: Template/Items/view.ctp:45 Template/Menus/view.ctp:50
+#: Template/Menus/view.ctp:62 Template/Users/view.ctp:56
+msgid "Details"
+msgstr ""
+
+#: Template/Layout/default.ctp:41
+msgid "Menus Creation"
+msgstr "Création de menus"
+
+#: Template/Layout/default.ctp:53
+msgid "Login"
+msgstr "Se connecter"
+
+#: Template/Layout/error.ctp:36 Template/Error/error400.ctp:36
+#: Template/Error/error500.ctp:41
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:44
+msgid "Back"
+msgstr ""
+
+#: Template/Menus/add.ctp:19
+msgid "Add Menu"
+msgstr ""
+
+#: Template/Menus/edit.ctp:17 Template/Menus/view.ctp:11
+msgid "Edit Menu"
+msgstr ""
+
+#: Template/Menus/index.ctp:19
+#, fuzzy
+msgid "Menus"
+msgstr "Liste des menus"
+
+#: Template/Menus/index.ctp:44 Template/Menus/view.ctp:12
+#: Template/Users/index.ctp:46 Template/Users/view.ctp:11
+msgid "Are you sure you want to delete {0}?"
+msgstr ""
+
+#: Template/Menus/view.ctp:10
+msgid "New Item"
+msgstr ""
+
+#: Template/Menus/view.ctp:12
+msgid "Delete Menu"
+msgstr ""
+
+#: Template/Menus/view.ctp:25
+msgid "User"
+msgstr ""
+
+#: Template/Menus/view.ctp:33 Template/Users/view.ctp:55
+msgid "Slug"
+msgstr ""
+
+#: Template/Menus/view.ctp:54
+#, fuzzy
+msgid "Related Items"
+msgstr "Liste des items"
+
+#: Template/Menus/view.ctp:59
+msgid "Menu Id"
+msgstr ""
+
+#: Template/Users/add.ctp:17
+msgid "Add User"
+msgstr ""
+
+#: Template/Users/edit.ctp:17 Template/Users/view.ctp:10
+msgid "Edit User"
+msgstr ""
+
+#: Template/Users/index.ctp:10
+msgid "New User"
+msgstr ""
+
+#: Template/Users/index.ctp:19
+msgid "Users"
+msgstr ""
+
+#: Template/Users/login.ctp:4
+msgid "Register"
+msgstr ""
+
+#: Template/Users/login.ctp:6
+#, fuzzy
+msgid "Menus List"
+msgstr "Liste des menus"
+
+#: Template/Users/view.ctp:11
+msgid "Delete User"
+msgstr ""
+
+#: Template/Users/view.ctp:24
+msgid "Grade"
+msgstr ""
+
+#: Template/Users/view.ctp:28
+msgid "Username"
+msgstr ""
+
+#: Template/Users/view.ctp:32
+msgid "Email"
+msgstr ""
+
+#: Template/Users/view.ctp:36
+msgid "Password"
+msgstr ""
+
+#: Template/Users/view.ctp:49
+#, fuzzy
+msgid "Related Menus"
+msgstr "Liste des menus"
+
+#: Template/Error/error400.ctp:37
+msgid "The requested address {0} was not found on this server."
+msgstr ""
+
+#: Template/Error/error500.ctp:39
+msgid "An Internal Error Has Occurred"
+msgstr ""
+
+#: Controller/Component/AuthComponent.php:502
+msgid "You are not authorized to access that location."
+msgstr ""
+
+#: Controller/Component/CsrfComponent.php:181
+#: Http/Middleware/CsrfProtectionMiddleware.php:228
+msgid "Missing CSRF token cookie"
+msgstr ""
+
+#: Controller/Component/CsrfComponent.php:185
+#: Http/Middleware/CsrfProtectionMiddleware.php:232
+msgid "CSRF token mismatch."
+msgstr ""
+
+#: Error/ExceptionRenderer.php:301
+msgid "Not Found"
+msgstr ""
+
+#: Error/ExceptionRenderer.php:303
+msgid "An Internal Error Has Occurred."
+msgstr ""
+
+#: Http/Response.php:2677
+msgid "The requested file contains `..` and will not be read."
+msgstr ""
+
+#: Http/Response.php:2698
+msgid "The requested file was not found"
+msgstr ""
+
+#: I18n/Number.php:106
+msgid "{0,number,#,###.##} KB"
+msgstr ""
+
+#: I18n/Number.php:108
+msgid "{0,number,#,###.##} MB"
+msgstr ""
+
+#: I18n/Number.php:110
+msgid "{0,number,#,###.##} GB"
+msgstr ""
+
+#: I18n/Number.php:112
+msgid "{0,number,#,###.##} TB"
+msgstr ""
+
+#: I18n/Number.php:104
+msgid "{0,number,integer} Byte"
+msgid_plural "{0,number,integer} Bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:80
+msgid "{0} from now"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:80
+msgid "{0} ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:83
+msgid "{0} after"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:83
+msgid "{0} before"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:114
+msgid "just now"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:151
+msgid "about a second ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:152
+msgid "about a minute ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:153
+msgid "about an hour ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:154 I18n/RelativeTimeFormatter.php:332
+msgid "about a day ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:155 I18n/RelativeTimeFormatter.php:333
+msgid "about a week ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:156 I18n/RelativeTimeFormatter.php:334
+msgid "about a month ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:157 I18n/RelativeTimeFormatter.php:335
+msgid "about a year ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:168
+msgid "in about a second"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:169
+msgid "in about a minute"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:170
+msgid "in about an hour"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:171 I18n/RelativeTimeFormatter.php:346
+msgid "in about a day"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:172 I18n/RelativeTimeFormatter.php:347
+msgid "in about a week"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:173 I18n/RelativeTimeFormatter.php:348
+msgid "in about a month"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:174 I18n/RelativeTimeFormatter.php:349
+msgid "in about a year"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:304
+msgid "today"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:370
+msgid "%s ago"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:371
+msgid "on %s"
+msgstr ""
+
+#: I18n/RelativeTimeFormatter.php:47 I18n/RelativeTimeFormatter.php:126
+#: I18n/RelativeTimeFormatter.php:316
+msgid "{0} year"
+msgid_plural "{0} years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:51 I18n/RelativeTimeFormatter.php:129
+#: I18n/RelativeTimeFormatter.php:319
+msgid "{0} month"
+msgid_plural "{0} months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:57 I18n/RelativeTimeFormatter.php:132
+#: I18n/RelativeTimeFormatter.php:322
+msgid "{0} week"
+msgid_plural "{0} weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:59 I18n/RelativeTimeFormatter.php:135
+#: I18n/RelativeTimeFormatter.php:325
+msgid "{0} day"
+msgid_plural "{0} days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:64 I18n/RelativeTimeFormatter.php:138
+msgid "{0} hour"
+msgid_plural "{0} hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:68 I18n/RelativeTimeFormatter.php:141
+msgid "{0} minute"
+msgid_plural "{0} minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: I18n/RelativeTimeFormatter.php:72 I18n/RelativeTimeFormatter.php:144
+msgid "{0} second"
+msgid_plural "{0} seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ORM/RulesChecker.php:56
+msgid "This value is already in use"
+msgstr ""
+
+#: ORM/RulesChecker.php:103
+msgid "This value does not exist"
+msgstr ""
+
+#: ORM/RulesChecker.php:127
+msgid "The count does not match {0}{1}"
+msgstr ""
+
+#: Utility/Text.php:933
+msgid "and"
+msgstr ""
+
+#: Validation/Validator.php:2510 View/Form/ArrayContext.php:226
+msgid "This field is required"
+msgstr ""
+
+#: Validation/Validator.php:2532
+msgid "This field cannot be left empty"
+msgstr ""
+
+#: Validation/Validator.php:2691
+msgid "The provided value is invalid"
+msgstr ""
+
+#: View/Helper/FormHelper.php:1114
+msgid "Edit {0}"
+msgstr ""
+
+#: View/Helper/FormHelper.php:1116
+msgid "New {0}"
+msgstr ""
+
+#: View/Helper/HtmlHelper.php:831
+msgid "Home"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:539
+msgid "January"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:540
+msgid "February"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:541
+msgid "March"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:542
+msgid "April"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:543
+msgid "May"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:544
+msgid "June"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:545
+msgid "July"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:546
+msgid "August"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:547
+msgid "September"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:548
+msgid "October"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:549
+msgid "November"
+msgstr ""
+
+#: View/Widget/DateTimeWidget.php:550
+msgid "December"
+msgstr ""
