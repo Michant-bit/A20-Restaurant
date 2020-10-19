@@ -86,7 +86,7 @@ class ItemsController extends AppController
     public function edit($id = null)
     {
         $item = $this->Items->get($id, [
-            'contain' => [],
+            'contain' => ['Menus'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $item = $this->Items->patchEntity($item, $this->request->getData());
@@ -130,7 +130,7 @@ class ItemsController extends AppController
         }
 
         // Check that the menu belongs to the current user.
-        $menu = $this->Menus->findById($id)->first();
+        $menu = $this->Menus->get($id)->first();
 
         $validator = false;
         

@@ -9,23 +9,22 @@ use Cake\Utility\Text;
 use Cake\Event\EventInterface;
 
 /**
- * Menus Model
+ * Restaurants Model
  *
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
- * @property \App\Model\Table\ItemsTable&\Cake\ORM\Association\HasMany $Items
  *
- * @method \App\Model\Entity\Menu get($primaryKey, $options = [])
- * @method \App\Model\Entity\Menu newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\Menu[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\Menu|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Menu saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\Menu patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\Menu[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\Menu findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\Restaurant get($primaryKey, $options = [])
+ * @method \App\Model\Entity\Restaurant newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\Restaurant[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\Restaurant|false save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Restaurant saveOrFail(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\Restaurant patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\Restaurant[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\Restaurant findOrCreate($search, callable $callback = null, $options = [])
  *
  * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
-class MenusTable extends Table
+class RestaurantsTable extends Table
 {
     /**
      * Initialize method
@@ -36,19 +35,16 @@ class MenusTable extends Table
     public function initialize(array $config)
     {
         parent::initialize($config);
-        $this->setTable('menus');
+
+        $this->setTable('restaurants');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('Translate', ['fields' => ['name', 'details']]);
 
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
-        ]);
-        $this->hasMany('Items', [
-            'foreignKey' => 'menu_id',
         ]);
     }
 
@@ -71,9 +67,10 @@ class MenusTable extends Table
             ->notEmptyString('name');
 
         $validator
-            ->scalar('details')
-            ->requirePresence('details', 'create')
-            ->notEmptyString('details');
+            ->scalar('location')
+            ->maxLength('location', 255)
+            ->requirePresence('location', 'create')
+            ->notEmptyString('location');
 
         return $validator;
     }
@@ -90,14 +87,5 @@ class MenusTable extends Table
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
-    }
-
-    public function beforeSave(EventInterface $event, $entity, $options)
-    {
-        if ($entity->isNew() && !$entity->slug) {
-            $sluggedName = Text::slug($entity->name);
-            // trim slug to maximum length defined in schema
-            $entity->slug = substr($sluggedName, 0, 191);
-        }
     }
 }

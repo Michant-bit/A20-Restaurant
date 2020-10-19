@@ -1,12 +1,13 @@
 <?php
 /**
  * @var \App\View\AppView $this
- * @var \App\Model\Entity\Item[]|\Cake\Collection\CollectionInterface $items
+ * @var \App\Model\Entity\Restaurant[]|\Cake\Collection\CollectionInterface $restaurants
  */
 ?>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('New Restaurant'), ['action' => 'add']) ?></li>
         <hr>
         <li class="heading"><?= __('All lists') ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
@@ -15,33 +16,33 @@
         <li><?= $this->Html->link(__('List Restaurants'), ['controller' => 'Restaurants', 'action' => 'index']) ?></li>
     </ul>
 </nav>
-<div class="items index large-9 medium-8 columns content">
-    <h3><?= __('Items') ?></h3>
+<div class="restaurants index large-9 medium-8 columns content">
+    <h3><?= __('Restaurants') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('menu_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('price') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('location') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($items as $item): ?>
+            <?php foreach ($restaurants as $restaurant): ?>
             <tr>
-                <td><?= $this->Number->format($item->id) ?></td>
-                <td><?= $item->has('menu') ? $this->Html->link($item->menu->name, ['controller' => 'Menus', 'action' => 'view', $item->menu->id]) : '' ?></td>
-                <td><?= h($item->name) ?></td>
-                <td><?= $this->Number->format($item->price) ?></td>
-                <td><?= h($item->created) ?></td>
-                <td><?= h($item->modified) ?></td>
+                <td><?= $this->Number->format($restaurant->id) ?></td>
+                <td><?= $restaurant->has('user') ? $this->Html->link($restaurant->user->username, ['controller' => 'Users', 'action' => 'view', $restaurant->user->id]) : '' ?></td>
+                <td><?= h($restaurant->name) ?></td>
+                <td><?= h($restaurant->location) ?></td>
+                <td><?= h($restaurant->created) ?></td>
+                <td><?= h($restaurant->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $item->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $item->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $item->id], ['confirm' => __('Are you sure you want to delete # {0}?', $item->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $restaurant->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $restaurant->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $restaurant->id], ['confirm' => __('Are you sure you want to delete # {0}?', $restaurant->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
