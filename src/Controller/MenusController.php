@@ -129,13 +129,11 @@ class MenusController extends AppController
 
         // Check that the menu belongs to the current user.
         $menu = $this->Menus->findById($slug)->first();
-
-        $validator = false;
         
         if($menu->user_id === $user['id']){
-            $validator = true;
-        } else if($user['grade'] === "administrator") {
-            $validator = true;
+            return true;
+        } else {
+            return parent::isAuthorized($user);
         }
         return $validator;
     }

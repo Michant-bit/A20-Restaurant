@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 19, 2020 at 11:23 PM
+-- Generation Time: Oct 20, 2020 at 02:29 AM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -173,10 +173,12 @@ INSERT INTO `restaurants` (`id`, `user_id`, `name`, `location`, `created`, `modi
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `grade` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
+  `grade` varchar(255) NOT NULL DEFAULT 'author',
+  `username` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `uuid` varchar(255) DEFAULT NULL,
+  `confirmed` tinyint(1) NOT NULL DEFAULT 0,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -185,10 +187,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `grade`, `username`, `email`, `password`, `created`, `modified`) VALUES
-(1, 'author', 'Antoine La Boissière', 'antoine.laboissiere@gmail.com', '$2y$10$RwnCzY5StK.O2RFY8YOc6O/PkFH8mUavghTcQBbj/hr3IyVsXoTaC', '2020-09-11 13:21:37', '2020-09-14 18:38:25'),
-(2, 'administrator', 'Admin', 'admin@gmail.com', '$2y$10$ri97XUBCGa8.vmj0R..u8.i6e/fxJ/UwCtEzr2pFoDrghB/XjWeWe', '2020-09-11 13:22:24', '2020-09-14 18:44:59'),
-(4, 'author', 'Simon Desjardins', 'simon.desjardins@hotmail.com', '$2y$10$sRyEl68WV0BsAnP4O.gt6uRUK99eQQAHAojV5QW5nCvfhIKMyd.Ue', '2020-09-28 14:31:18', '2020-09-28 14:31:18');
+INSERT INTO `users` (`id`, `grade`, `username`, `email`, `password`, `uuid`, `confirmed`, `created`, `modified`) VALUES
+(1, 'author', 'Antoine La Boissière', 'antoine.laboissiere@gmail.com', '$2y$10$FYnAag4tDcWrfnSmAtTOk.4jF6EqS9ZOy.WNO6i.8IP3QJPBRP2WW', '76e345e8-4f4f-437b-8f01-0999bf9c2835', 0, '2020-09-11 13:21:37', '2020-10-20 01:16:01'),
+(2, 'administrator', 'Admin', 'admin@gmail.com', '$2y$10$ri97XUBCGa8.vmj0R..u8.i6e/fxJ/UwCtEzr2pFoDrghB/XjWeWe', '9f924ef3-236e-4079-b7ec-34fa9222d887', 0, '2020-09-11 13:22:24', '2020-10-20 01:16:22'),
+(4, 'author', 'Simon Desjardins', 'simon.desjardins@hotmail.com', '$2y$10$KitfBr6rXqQBybkj40zUwuo0BSEueGcEkB2qywnM.wrQxKDj4YFrq', '58136847-1c36-4580-be4b-7f97ddfb296c', 0, '2020-09-28 14:31:18', '2020-10-20 01:16:37');
 
 --
 -- Indexes for dumped tables
@@ -250,19 +252,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `i18n`
 --
 ALTER TABLE `i18n`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `menus`

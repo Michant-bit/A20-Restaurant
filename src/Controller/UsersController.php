@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\Mailer\Email;
+use Cake\Utility\Text;
 
 /**
  * Users Controller
@@ -51,8 +52,16 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user->uuid = Text::uuid();
+            $user->confirmed = false;
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
+
+                // Envoyer un courriel de confirmation
+                $confirmation_link = "http://" . $_SERVER['HTTP_HOST'] . $this->request->webroot . "users/confirm/" . $user->uuid;
+
+                $email = new Email('default');
+                $email->to($user->email)->subject('Confirmation')->send($confirmation_link);
 
                 return $this->redirect(['action' => 'index']);
             }
@@ -75,6 +84,7 @@ class UsersController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
+            //if($user->uuid == '') $user->uuid = Text::uuid();
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
@@ -128,6 +138,18 @@ class UsersController extends AppController
     {
         $this->Flash->success('You are now logged out.');
         return $this->redirect($this->Auth->logout());
+    }
+
+    public function confirm($uuid)
+    {
+        $user = $this->Users->findByUuid($uuid)->firstOrFail();
+        $user->confirmed = true;
+        debug($user); die();
+        if($this->Users->save($user)){
+            $this->Flash->success(_('Thank you') . '. ' . (_('Your email has been confirmed')));
+            //return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(_('The confirmation could not be save. Please try again.'));
     }
 
     public function isAuthorized($user)

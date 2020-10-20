@@ -132,6 +132,13 @@ class FilesController extends AppController
 
     public function isAuthorized($user)
     {
-        return true;
+        if (in_array($action, ['index', 'add'])) {
+            if($this->Auth->User->confirmed == true){
+                return true;
+            } else {
+                $this->Flash->error(__('Your account is not confirmed. Please confirmed your account before using files.'));
+                return false;
+            }
+        }
     }
 }

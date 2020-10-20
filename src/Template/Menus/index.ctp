@@ -25,6 +25,7 @@
                 <th scope="col"><?= $this->Paginator->sort('Author') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('details') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('File') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -36,6 +37,18 @@
                 <td><?= $menu->has('user') ? $this->Html->link($menu->user->username, ['controller' => 'Users', 'action' => 'view', $menu->user->id]) : '' ?></td>
                 <td><?= h($menu->name) ?></td>
                 <td><?= h($menu->details) ?></td>
+                <td>
+                    <?php
+                        if (isset($menu->files[0])) {
+                            echo $this->Html->image($menu->files[0]->path . $menu->files[0]->name, [
+                                "alt" => $menu->files[0]->name,
+                                "width" => "220px",
+                                "height" => "150px",
+                                'url' => ['controller' => 'Files', 'action' => 'view', $menu->files[0]->id]
+                            ]);
+                        }
+                    ?>
+                </td>
                 <td><?= h($menu->created) ?></td>
                 <td><?= h($menu->modified) ?></td>
                 <td class="actions">

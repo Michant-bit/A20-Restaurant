@@ -83,4 +83,20 @@
         </table>
         <?php endif; ?>
     </div>
+    <div class="related">
+        <h4><?= __('Related Files') ?></h4>
+        <?php if (!empty($menu->files)): ?>
+            <table cellpadding="0" cellspacing="0">
+                <?php foreach ($menu->files as $files): ?>
+                    <tr>
+                        <td>    <?php
+                            echo $this->Html->image($files->path . $files->name, [
+                                "alt" => $files->name,
+                            ]);
+                            ?></td>
+                    </tr>
+            <?php endforeach; ?>
+            </table>
+        <?php endif; ?>
+    </div>
 </div>

@@ -39,10 +39,13 @@
         Seul un administrateur peut avoir accès à la liste des utilisateurs et modifier ou supprimer n'importe quel menu et/ou restaurant.
     </h6>
     <h6>
-        Les tables menus et items sont multilingues.
+        Les tables menus et items sont multilingues. 
+        Je n'ai pas réussi à faire afficher l'image que l'on upload dans les pages index/view de menu.
+        L'image est bien ajouté dans le path, mais elle ne s'affiche pas.
     </h6>
     <h6>
         Il faut cliquer sur le nom de l'utilisateur dans la bar de menu pour modifier son compte.
+        Un message de confirmation est bien envoyé lorsqu'un utilisateur se créé un compte, mais un petit bug fait que confirmed /= 1.
     </h6>
     <h6>
         ***Il faut être dans la vue d'un menu pour ajouter un item à celui-ci***
