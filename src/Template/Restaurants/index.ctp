@@ -14,6 +14,7 @@
         <li><?= $this->Html->link(__('List Menus'), ['controller' => 'Menus', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Items'), ['controller' => 'Items', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Restaurants'), ['controller' => 'Restaurants', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="restaurants index large-9 medium-8 columns content">
@@ -21,24 +22,18 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('location') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($restaurants as $restaurant): ?>
             <tr>
-                <td><?= $this->Number->format($restaurant->id) ?></td>
                 <td><?= $restaurant->has('user') ? $this->Html->link($restaurant->user->username, ['controller' => 'Users', 'action' => 'view', $restaurant->user->id]) : '' ?></td>
                 <td><?= h($restaurant->name) ?></td>
                 <td><?= h($restaurant->location) ?></td>
-                <td><?= h($restaurant->created) ?></td>
-                <td><?= h($restaurant->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $restaurant->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $restaurant->id]) ?>

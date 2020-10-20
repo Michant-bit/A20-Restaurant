@@ -20,6 +20,7 @@ class ItemsController extends AppController
 
     public function initialize(){
         parent::initialize();
+        $this->Auth->allow(['add']);
     }
 
     public function index()
@@ -63,6 +64,7 @@ class ItemsController extends AppController
             if ($this->request->is('post')) {
                 $item = $this->Items->patchEntity($item, $this->request->getData());
                 $item->menu_id = $this->request->session()->read('Menu.id');
+                //debug($item); die();
                 $this->request->session()->delete('Menu.id');
                 if ($this->Items->save($item)) {
                     $this->Flash->success(__('The item has been saved.'));
@@ -123,22 +125,6 @@ class ItemsController extends AppController
 
     public function isAuthorized($user)
     {
-        // All other actions require a id.
-        $id = $this->request->getParam('pass.0');
-        if (!$id) {
-            return false;
-        }
-
-        // Check that the menu belongs to the current user.
-        $menu = $this->Menus->get($id)->first();
-
-        $validator = false;
-        
-        if($menu->user_id === $user['id']){
-            $validator = true;
-        } else if($user['grade'] === "administrator") {
-            $validator = true;
-        }
-        return $validator;
+        return true;
     }
 }

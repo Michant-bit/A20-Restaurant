@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 19, 2020 at 04:43 PM
+-- Generation Time: Oct 19, 2020 at 11:23 PM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -25,6 +25,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `files`
+--
+
+CREATE TABLE `files` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `path` varchar(255) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 = Active, 0 = Inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `i18n`
 --
 
@@ -42,27 +57,28 @@ CREATE TABLE `i18n` (
 --
 
 INSERT INTO `i18n` (`id`, `locale`, `model`, `foreign_key`, `field`, `content`) VALUES
-(3, 'en_CA', 'Menus', 1, 'name', 'Delicious Pizza'),
-(4, 'en_CA', 'Menus', 1, 'details', 'A delicious pizza'),
-(5, 'en_CA', 'Menus', 2, 'name', 'Tasty Burger'),
-(6, 'en_CA', 'Menus', 2, 'details', 'A very tasty burger'),
-(7, 'en_CA', 'Menus', 10, 'name', 'Great Pad Thaï'),
-(8, 'en_CA', 'Menus', 10, 'details', 'The greatest Pad Thaï'),
-(9, 'fr_CA', 'Menus', 2, 'name', 'Très bon hamburger'),
-(10, 'fr_CA', 'Menus', 10, 'name', 'Special Pad Thaï');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
-
-CREATE TABLE `images` (
-  `id` int(11) NOT NULL,
-  `menu_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `image` blob NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+(11, 'fr_CA', 'Menus', 1, 'name', 'Délicieuse pizza'),
+(12, 'fr_CA', 'Menus', 1, 'details', 'Une pizza très délicieuse'),
+(13, 'fr_CA', 'Menus', 2, 'name', 'Savoureux Burger'),
+(14, 'fr_CA', 'Menus', 2, 'details', 'Un très bon burger'),
+(15, 'fr_CA', 'Menus', 3, 'details', 'Un test de l\'administrateur'),
+(16, 'fr_CA', 'Menus', 10, 'name', 'Grand Pad Thaï'),
+(17, 'fr_CA', 'Menus', 10, 'details', 'Le meilleur Pad Thaï jamais créé'),
+(18, 'es_ES', 'Menus', 1, 'name', 'Deliciosa pizza'),
+(19, 'es_ES', 'Menus', 1, 'details', 'Una pizza muy deliciosa'),
+(20, 'es_ES', 'Menus', 2, 'name', 'Sabrosa hamburguesa'),
+(21, 'es_ES', 'Menus', 2, 'details', 'Una muy buena hamburguesa'),
+(22, 'es_ES', 'Menus', 3, 'name', 'Prueba'),
+(23, 'es_ES', 'Menus', 3, 'details', 'Una prueba del administrador'),
+(24, 'es_ES', 'Menus', 10, 'name', 'Gran Pad Thaï'),
+(25, 'es_ES', 'Menus', 10, 'details', 'El mejor Pad Thaï jamás creado'),
+(26, 'es_ES', 'Items', 1, 'name', 'Queso'),
+(27, 'es_ES', 'Items', 1, 'details', 'Un infierno de queso'),
+(28, 'es_ES', 'Items', 2, 'name', 'Prueba'),
+(29, 'es_ES', 'Items', 2, 'details', 'Otra prueba del administrador'),
+(30, 'fr_CA', 'Items', 1, 'name', 'Fromage'),
+(31, 'fr_CA', 'Items', 1, 'details', 'Un fromage d\'enfer'),
+(32, 'fr_CA', 'Items', 2, 'details', 'Un autre test de l\'administrateur');
 
 -- --------------------------------------------------------
 
@@ -73,9 +89,9 @@ CREATE TABLE `images` (
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `price` double NOT NULL DEFAULT 0,
-  `details` text NOT NULL,
+  `details` text DEFAULT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -85,8 +101,8 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `menu_id`, `name`, `price`, `details`, `created`, `modified`) VALUES
-(1, 1, 'Cheese', 0.2, 'One hell of a cheese', '2020-09-11 13:25:28', '2020-09-11 13:25:28'),
-(2, 3, 'Test', 0, 'A test from the admin', '2020-09-11 13:26:08', '2020-09-11 13:26:08');
+(1, 1, 'Cheese', 0.2, 'One hell of a cheese', '2020-09-11 13:25:28', '2020-10-19 17:44:04'),
+(2, 3, 'Test', 0, 'Another test from the admin', '2020-09-11 13:26:08', '2020-10-19 17:44:30');
 
 -- --------------------------------------------------------
 
@@ -109,10 +125,21 @@ CREATE TABLE `menus` (
 --
 
 INSERT INTO `menus` (`id`, `user_id`, `name`, `slug`, `details`, `created`, `modified`) VALUES
-(1, 1, 'Bonne Pizza', 'pizza', 'Une très bonne pizza', '2020-09-11 13:23:26', '2020-10-18 23:48:38'),
-(2, 1, 'Burger', 'burger', 'Un très bon hamburger', '2020-09-11 13:23:52', '2020-10-18 23:50:24'),
-(3, 2, 'Test', 'test', 'A test from the admin', '2020-09-11 13:24:27', '2020-09-11 13:24:27'),
-(10, 4, 'Super Pad Thaï', 'Pad-Thai', 'La cuisine asiatique servi froid', '2020-09-28 14:39:04', '2020-10-18 23:50:40');
+(1, 1, 'Delicious Pizza', 'pizza', 'A very delicious pizza', '2020-09-11 13:23:26', '2020-10-19 17:34:37'),
+(2, 1, 'Tasty Burger', 'burger', 'A very good burger', '2020-09-11 13:23:52', '2020-10-19 17:35:06'),
+(3, 2, 'Test', 'test', 'A test from the admin', '2020-09-11 13:24:27', '2020-10-19 17:35:34'),
+(10, 4, 'Great Pad Thaï', 'Pad-Thai', 'The best Pad Thaï ever created', '2020-09-28 14:39:04', '2020-10-19 17:36:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menus_files`
+--
+
+CREATE TABLE `menus_files` (
+  `id_menu` int(11) NOT NULL,
+  `id_image` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -135,7 +162,8 @@ CREATE TABLE `restaurants` (
 
 INSERT INTO `restaurants` (`id`, `user_id`, `name`, `location`, `created`, `modified`) VALUES
 (1, 1, 'San Antonio Restaurant', '632 rue Notre-Dame, Repentigny QC', '2020-10-19 11:27:59', '2020-10-19 11:27:59'),
-(2, 4, 'Simon\'s Restaurant', '7800 Constantia, South Africa', '2020-10-19 11:29:27', '2020-10-19 11:29:27');
+(2, 4, 'Simon\'s Restaurant', '7800 Constantia, South Africa', '2020-10-19 11:29:27', '2020-10-19 11:29:27'),
+(3, 1, 'Test', '1260 Test', '2020-10-19 16:02:47', '2020-10-19 16:02:47');
 
 -- --------------------------------------------------------
 
@@ -167,19 +195,18 @@ INSERT INTO `users` (`id`, `grade`, `username`, `email`, `password`, `created`, 
 --
 
 --
+-- Indexes for table `files`
+--
+ALTER TABLE `files`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `i18n`
 --
 ALTER TABLE `i18n`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `I18N_LOCALE_FIELD` (`locale`,`model`,`foreign_key`,`field`),
   ADD KEY `I18N_FIELD` (`model`,`foreign_key`,`field`);
-
---
--- Indexes for table `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `menu_id` (`menu_id`);
 
 --
 -- Indexes for table `items`
@@ -194,6 +221,13 @@ ALTER TABLE `items`
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`),
   ADD KEY `utilisateur_id` (`user_id`);
+
+--
+-- Indexes for table `menus_files`
+--
+ALTER TABLE `menus_files`
+  ADD KEY `id_menu` (`id_menu`,`id_image`),
+  ADD KEY `id_image` (`id_image`);
 
 --
 -- Indexes for table `restaurants`
@@ -213,16 +247,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `files`
+--
+ALTER TABLE `files`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `i18n`
 --
 ALTER TABLE `i18n`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `images`
---
-ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `items`
@@ -240,7 +274,7 @@ ALTER TABLE `menus`
 -- AUTO_INCREMENT for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -253,12 +287,6 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `images`
---
-ALTER TABLE `images`
-  ADD CONSTRAINT `images_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `items`
 --
 ALTER TABLE `items`
@@ -269,6 +297,13 @@ ALTER TABLE `items`
 --
 ALTER TABLE `menus`
   ADD CONSTRAINT `menus_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `menus_files`
+--
+ALTER TABLE `menus_files`
+  ADD CONSTRAINT `menus_files_ibfk_1` FOREIGN KEY (`id_menu`) REFERENCES `menus` (`id`),
+  ADD CONSTRAINT `menus_files_ibfk_2` FOREIGN KEY (`id_image`) REFERENCES `files` (`id`);
 
 --
 -- Constraints for table `restaurants`

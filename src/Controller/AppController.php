@@ -80,11 +80,13 @@ class AppController extends Controller
 
     public function isAuthorized($user)
     {
-        // By default deny access.
+        if($user['grade'] === "administrator"){
+            return true;
+        }
         return false;
     }
 
-    public function changeLang($lang = 'en_CA'){
+    public function changeLang($lang = 'en_US'){
         I18n::setLocale($lang);
         $this->request->session()->write('Config.language', $lang);
         return $this->redirect($this->request->referer());

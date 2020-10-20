@@ -44,6 +44,9 @@ $cakeDescription = 'Restaurant';
         <div class="top-bar-section">
             <ul class="right">
                 <li>
+                <?= $this->Html->link('À propos', ['controller' => 'Pages', 'action' => 'apropos']);?>
+                </li>
+                <li>
                     <?= $this->Html->link('Français', ['action' => 'changeLang', 'fr_CA'], ['escape' => false]);?>
                 </li>
                 <li>
@@ -55,9 +58,17 @@ $cakeDescription = 'Restaurant';
                 <li>
                     <?php
                         $loguser = $this->request->session()->read('Auth.User');
+                        $user = $loguser['username'];
+                        $id = $loguser['id'];
                         if($loguser){
-                            $user = $loguser['username'];
-                            echo $this->Html->link(__($user . ' [Logout]'), ['controller' => 'Users', 'action' => 'logout']);
+                            echo $this->Html->link(__($user), ['controller' => 'Users', 'action' => 'view', $id]);
+                        }
+                    ?>
+                </li>
+                <li>
+                    <?php
+                        if($loguser){
+                            echo $this->Html->link(__('[Logout]'), ['controller' => 'Users', 'action' => 'logout']);
                         } else {
                             echo $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
                         }

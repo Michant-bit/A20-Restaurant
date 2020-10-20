@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -120,6 +121,7 @@ class UsersController extends AppController
     {
         parent::initialize();
         $this->Auth->allow(['logout', 'add']);
+        $this->Auth->deny(['index', 'view']);
     }
 
     public function logout()
@@ -131,9 +133,12 @@ class UsersController extends AppController
     public function isAuthorized($user)
     {
         $action = $this->request->getParam('action');
-        // The add and tags actions are always allowed to logged in users.
-        if (in_array($action, ['add', 'tags'])) {
+        if (in_array($action, ['add', 'edit'])) {
             return true;
+        }
+
+        if (in_array($action, ['index'])) {
+            return parent::isAuthorized($user);
         }
 
         // All other actions require a id.
@@ -144,14 +149,11 @@ class UsersController extends AppController
 
         // Check that the menu belongs to the current user.
         $newUser = $this->Users->findById($id)->first();
-
-        $validator = false;
         
         if($newUser->id === $user['id']){
-            $validator = true;
-        } else if($user['grade'] === "administrator") {
-            $validator = true;
+            return true;
+        } else {
+            return parent::isAuthorized($user);
         }
-        return $validator;
     }
 }

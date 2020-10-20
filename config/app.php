@@ -401,4 +401,32 @@ return [
     'Session' => [
         'defaults' => 'php',
     ],
+
+    'EmailTransport' => [
+        'default' => [
+            'className' => MailTransport::class,
+            'host' => 'localhost',
+            'port' => 25,
+            'timeout' => 30,
+            'username' => null,
+            'password' => null,
+            'client' => null,
+            'tls' => null,
+            'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+        ],
+        'gmail' => [
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => 465,
+            'username' => 'restaurantWebMomo@gmail.com',
+            'password' => 'knzebekzgszdisqh',
+            'className' => 'Smtp'
+        ],
+    ],
+
+    'Email' => [
+        'default' => [
+            'transport' => 'gmail',
+            'from' => 'restaurantWebMomo@gmail.com'
+        ],
+    ],
 ];

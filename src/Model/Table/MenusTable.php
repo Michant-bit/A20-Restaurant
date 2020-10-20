@@ -50,6 +50,11 @@ class MenusTable extends Table
         $this->hasMany('Items', [
             'foreignKey' => 'menu_id',
         ]);
+        $this->belongsToMany('Files', [
+            'foreignKey' => 'menu_id',
+            'targetForeignKey' => 'file_id',
+            'joinTable' => 'menus_files',
+        ]);
     }
 
     /**

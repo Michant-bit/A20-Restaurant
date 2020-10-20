@@ -13,6 +13,7 @@
         <li><?= $this->Html->link(__('List Menus'), ['controller' => 'Menus', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Items'), ['controller' => 'Items', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Restaurants'), ['controller' => 'Restaurants', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Files'), ['controller' => 'Files', 'action' => 'index']) ?></li>
     </ul>
 </nav>
 <div class="items index large-9 medium-8 columns content">
@@ -20,9 +21,9 @@
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('menu_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('details') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('price') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -32,9 +33,9 @@
         <tbody>
             <?php foreach ($items as $item): ?>
             <tr>
-                <td><?= $this->Number->format($item->id) ?></td>
                 <td><?= $item->has('menu') ? $this->Html->link($item->menu->name, ['controller' => 'Menus', 'action' => 'view', $item->menu->id]) : '' ?></td>
                 <td><?= h($item->name) ?></td>
+                <td><?= h($item->details) ?></td>
                 <td><?= $this->Number->format($item->price) ?></td>
                 <td><?= h($item->created) ?></td>
                 <td><?= h($item->modified) ?></td>
