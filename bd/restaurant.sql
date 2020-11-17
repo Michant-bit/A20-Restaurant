@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 20, 2020 at 02:29 AM
+-- Generation Time: Nov 17, 2020 at 02:58 PM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -25,6 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cities`
+--
+
+CREATE TABLE `cities` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `name`) VALUES
+(1, 'Quebec'),
+(2, 'Montreal');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `files`
 --
 
@@ -36,6 +55,13 @@ CREATE TABLE `files` (
   `modified` datetime NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '1 = Active, 0 = Inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `files`
+--
+
+INSERT INTO `files` (`id`, `name`, `path`, `created`, `modified`, `status`) VALUES
+(4, 'Abstract.jpg', 'files/add/', '2020-10-20 01:51:44', '2020-10-20 01:51:44', 1);
 
 -- --------------------------------------------------------
 
@@ -150,6 +176,7 @@ CREATE TABLE `menus_files` (
 CREATE TABLE `restaurants` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `city_id` int(11) DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `created` datetime NOT NULL,
@@ -160,10 +187,10 @@ CREATE TABLE `restaurants` (
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`id`, `user_id`, `name`, `location`, `created`, `modified`) VALUES
-(1, 1, 'San Antonio Restaurant', '632 rue Notre-Dame, Repentigny QC', '2020-10-19 11:27:59', '2020-10-19 11:27:59'),
-(2, 4, 'Simon\'s Restaurant', '7800 Constantia, South Africa', '2020-10-19 11:29:27', '2020-10-19 11:29:27'),
-(3, 1, 'Test', '1260 Test', '2020-10-19 16:02:47', '2020-10-19 16:02:47');
+INSERT INTO `restaurants` (`id`, `user_id`, `city_id`, `name`, `location`, `created`, `modified`) VALUES
+(1, 1, 1, 'San Antonio Restaurant', '632 rue Notre-Dame', '2020-10-19 11:27:59', '2020-10-19 11:27:59'),
+(2, 4, 2, 'Simon\'s Restaurant', '7800 Constantia', '2020-10-19 11:29:27', '2020-10-19 11:29:27'),
+(3, 1, 1, 'Test', '1260 Test', '2020-10-19 16:02:47', '2020-10-19 16:02:47');
 
 -- --------------------------------------------------------
 
@@ -189,12 +216,18 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `grade`, `username`, `email`, `password`, `uuid`, `confirmed`, `created`, `modified`) VALUES
 (1, 'author', 'Antoine La Boissière', 'antoine.laboissiere@gmail.com', '$2y$10$FYnAag4tDcWrfnSmAtTOk.4jF6EqS9ZOy.WNO6i.8IP3QJPBRP2WW', '76e345e8-4f4f-437b-8f01-0999bf9c2835', 0, '2020-09-11 13:21:37', '2020-10-20 01:16:01'),
-(2, 'administrator', 'Admin', 'admin@gmail.com', '$2y$10$ri97XUBCGa8.vmj0R..u8.i6e/fxJ/UwCtEzr2pFoDrghB/XjWeWe', '9f924ef3-236e-4079-b7ec-34fa9222d887', 0, '2020-09-11 13:22:24', '2020-10-20 01:16:22'),
-(4, 'author', 'Simon Desjardins', 'simon.desjardins@hotmail.com', '$2y$10$KitfBr6rXqQBybkj40zUwuo0BSEueGcEkB2qywnM.wrQxKDj4YFrq', '58136847-1c36-4580-be4b-7f97ddfb296c', 0, '2020-09-28 14:31:18', '2020-10-20 01:16:37');
+(2, 'administrator', 'Admin', 'admin@gmail.com', '$2y$10$ri97XUBCGa8.vmj0R..u8.i6e/fxJ/UwCtEzr2pFoDrghB/XjWeWe', '9f924ef3-236e-4079-b7ec-34fa9222d887', 1, '2020-09-11 13:22:24', '2020-10-20 01:16:22'),
+(4, 'author', 'Simon Desjardins', 'simon.desjardins@hotmail.com', '$2y$10$KitfBr6rXqQBybkj40zUwuo0BSEueGcEkB2qywnM.wrQxKDj4YFrq', '58136847-1c36-4580-be4b-7f97ddfb296c', 1, '2020-09-28 14:31:18', '2020-10-20 01:16:37');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `cities`
+--
+ALTER TABLE `cities`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `files`
@@ -236,7 +269,8 @@ ALTER TABLE `menus_files`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `city_id` (`city_id`);
 
 --
 -- Indexes for table `users`
@@ -249,10 +283,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cities`
+--
+ALTER TABLE `cities`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `i18n`
@@ -282,7 +322,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -311,7 +351,8 @@ ALTER TABLE `menus_files`
 -- Constraints for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `restaurants_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

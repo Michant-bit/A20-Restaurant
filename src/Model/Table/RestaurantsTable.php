@@ -46,6 +46,11 @@ class RestaurantsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
+ 
+        $this->belongsTo('Cities', [
+            'foreignKey' => 'city_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**

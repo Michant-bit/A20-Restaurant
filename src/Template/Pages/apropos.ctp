@@ -24,6 +24,10 @@
     <h6>Grade: Auteur</h6>
     <h6>Username: antoine.laboissiere@gmail.com</h6>
     <h6>Password: antoine</h6>
+    <br/>
+    <h6>Grade: Auteur</h6>
+    <h6>Username: simon.desjardins@hotmail.com</h6>
+    <h6>Password: simon</h6>
     <hr>
     <h4><?= __('Instructions') ?></h4>
     <h6>
@@ -39,8 +43,8 @@
         Seul un administrateur peut avoir accès à la liste des utilisateurs et modifier ou supprimer n'importe quel menu et/ou restaurant.
     </h6>
     <h6>
-        Les tables menus et items sont multilingues. 
-        Je n'ai pas réussi à faire afficher l'image que l'on upload dans les pages index/view de menu.
+        Les tables menus et items sont multilingues, il faut simplement cliquer sur les boutons du haut. 
+        On peut télécharger une image, mais je n'ai pas réussi à temps à faire afficher l'image que l'on upload dans les pages index/view de menu.
         L'image est bien ajouté dans le path, mais elle ne s'affiche pas.
     </h6>
     <h6>
