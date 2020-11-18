@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Nov 17, 2020 at 02:58 PM
+-- Generation Time: Nov 18, 2020 at 02:09 PM
 -- Server version: 10.3.17-MariaDB
 -- PHP Version: 7.3.9
 
@@ -39,7 +39,15 @@ CREATE TABLE `cities` (
 
 INSERT INTO `cities` (`id`, `name`) VALUES
 (1, 'Quebec'),
-(2, 'Montreal');
+(2, 'Montreal'),
+(3, 'Toronto'),
+(4, 'Ottawa'),
+(5, 'Calgary'),
+(6, 'Edmonton'),
+(7, 'Vancouver'),
+(8, 'Halifax'),
+(9, 'Laval'),
+(10, 'Winnipeg');
 
 -- --------------------------------------------------------
 
@@ -62,6 +70,49 @@ CREATE TABLE `files` (
 
 INSERT INTO `files` (`id`, `name`, `path`, `created`, `modified`, `status`) VALUES
 (4, 'Abstract.jpg', 'files/add/', '2020-10-20 01:51:44', '2020-10-20 01:51:44', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_groups`
+--
+
+CREATE TABLE `food_groups` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `food_groups`
+--
+
+INSERT INTO `food_groups` (`id`, `name`) VALUES
+(1, 'Dairy'),
+(2, 'Fruits'),
+(3, 'Grains, beans and legumes'),
+(4, 'Meat'),
+(5, 'Confections'),
+(6, 'Vegetables'),
+(7, 'Water');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_products`
+--
+
+CREATE TABLE `food_products` (
+  `id` int(11) NOT NULL,
+  `food_group_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `food_products`
+--
+
+INSERT INTO `food_products` (`id`, `food_group_id`, `name`) VALUES
+(1, 1, 'Cheese');
 
 -- --------------------------------------------------------
 
@@ -115,6 +166,8 @@ INSERT INTO `i18n` (`id`, `locale`, `model`, `foreign_key`, `field`, `content`) 
 CREATE TABLE `items` (
   `id` int(11) NOT NULL,
   `menu_id` int(11) NOT NULL,
+  `food_group_id` int(11) NOT NULL,
+  `food_product_id` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `price` double NOT NULL DEFAULT 0,
   `details` text DEFAULT NULL,
@@ -126,9 +179,9 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`id`, `menu_id`, `name`, `price`, `details`, `created`, `modified`) VALUES
-(1, 1, 'Cheese', 0.2, 'One hell of a cheese', '2020-09-11 13:25:28', '2020-10-19 17:44:04'),
-(2, 3, 'Test', 0, 'Another test from the admin', '2020-09-11 13:26:08', '2020-10-19 17:44:30');
+INSERT INTO `items` (`id`, `menu_id`, `food_group_id`, `food_product_id`, `name`, `price`, `details`, `created`, `modified`) VALUES
+(1, 1, 1, 1, 'Chedar', 0.2, 'One hell of a cheese', '2020-09-11 13:25:28', '2020-10-19 17:44:04'),
+(2, 2, 1, 1, 'Mozarrela', 0, 'Another test from the admin', '2020-09-11 13:26:08', '2020-10-19 17:44:30');
 
 -- --------------------------------------------------------
 
@@ -236,6 +289,19 @@ ALTER TABLE `files`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `food_groups`
+--
+ALTER TABLE `food_groups`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `food_products`
+--
+ALTER TABLE `food_products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `food_group_id` (`food_group_id`);
+
+--
 -- Indexes for table `i18n`
 --
 ALTER TABLE `i18n`
@@ -248,7 +314,10 @@ ALTER TABLE `i18n`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `menu_id` (`menu_id`);
+  ADD KEY `menu_id` (`menu_id`),
+  ADD KEY `food_product_id` (`food_product_id`),
+  ADD KEY `food_product_id_2` (`food_product_id`),
+  ADD KEY `food_group_id` (`food_group_id`);
 
 --
 -- Indexes for table `menus`
@@ -286,13 +355,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `food_groups`
+--
+ALTER TABLE `food_groups`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `food_products`
+--
+ALTER TABLE `food_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `i18n`
@@ -329,10 +410,18 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `food_products`
+--
+ALTER TABLE `food_products`
+  ADD CONSTRAINT `food_products_ibfk_1` FOREIGN KEY (`food_group_id`) REFERENCES `food_groups` (`id`);
+
+--
 -- Constraints for table `items`
 --
 ALTER TABLE `items`
-  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`);
+  ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`id`),
+  ADD CONSTRAINT `items_ibfk_2` FOREIGN KEY (`food_product_id`) REFERENCES `food_products` (`id`),
+  ADD CONSTRAINT `items_ibfk_3` FOREIGN KEY (`food_group_id`) REFERENCES `food_groups` (`id`);
 
 --
 -- Constraints for table `menus`

@@ -45,6 +45,16 @@ class ItemsTable extends Table
             'foreignKey' => 'menu_id',
             'joinType' => 'INNER',
         ]);
+
+        $this->belongsTo('FoodGroups', [
+            'foreignKey' => 'food_group_id',
+            'joinType' => 'INNER',
+        ]);
+
+        $this->belongsTo('FoodProducts', [
+            'foreignKey' => 'food_product_id',
+            'joinType' => 'INNER',
+        ]);
     }
 
     /**

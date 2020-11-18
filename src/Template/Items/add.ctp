@@ -1,4 +1,13 @@
 <?php
+    $urlToLinkedListFilter = $this->Url->build([
+        "controller" => "FoodProducts",
+        "action" => "getByFoodGroup",
+        "_ext" => "json"
+    ]);
+    echo $this->Html->scriptBlock('var urlToLinkedListFilter = "' . $urlToLinkedListFilter . '";', ['block' => true]);
+    echo $this->Html->script('Items/add_edit', ['block' => 'scriptBottom']);
+?>
+<?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Item $item
@@ -17,6 +26,8 @@
     <fieldset>
         <legend><?= __('Add Item') ?></legend>
         <?php
+            echo $this->Form->control('food_group_id', ['option' => $foodGroups]);
+            echo $this->Form->control('food_product_id', ['option' => [__('Please select a Food Group first')]]);
             echo $this->Form->control('name');
             echo $this->Form->control('price');
             echo $this->Form->control('details');

@@ -62,6 +62,7 @@ class RestaurantsController extends AppController
             $this->Flash->error(__('The restaurant could not be saved. Please, try again.'));
         }
         $users = $this->Restaurants->Users->find('list', ['limit' => 200]);
+        $cities = $this->Restaurants->Cities->find('list', ['limit' => 200]); // Attention
         $this->set(compact('restaurant', 'users'));
     }
 

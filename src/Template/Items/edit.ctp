@@ -1,4 +1,13 @@
 <?php
+    $urlToLinkedListFilter = $this->Url->build([
+        "controller" => "FoodProducts",
+        "action" => "getByFoodGroup",
+        "_ext" => "json"
+    ]);
+    echo $this->Html->scriptBlock('var urlToLinkedListFilter = "' . $urlToLinkedListFilter . '";', ['block' => true]);
+    echo $this->Html->script('Items/add_edit', ['block' => 'scriptBottom']);
+?>
+<?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Item $item
