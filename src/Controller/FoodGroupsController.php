@@ -14,7 +14,7 @@ class FoodGroupsController extends AppController
 {
     public function initialize() {
         parent::initialize();
-        $this->Auth->allow(['getByFoodGroup', 'add', 'edit', 'delete']);
+        $this->Auth->allow(['getByFoodGroup']);
     }
 
     /**

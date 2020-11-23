@@ -26,6 +26,8 @@
         <legend><?= __('Edit Item') ?></legend>
         <?php
             echo $this->Form->control('menu_id', ['options' => $menus]);
+            echo $this->Form->control('food_group_id', ['option' => $foodGroups]);
+            echo $this->Form->control('food_product_id', ['option' => [__('Please select a Food Group first')]]);
             echo $this->Form->control('name');
             echo $this->Form->control('price');
             echo $this->Form->control('details');
