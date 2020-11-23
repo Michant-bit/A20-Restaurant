@@ -40,7 +40,9 @@ class CitiesController extends AppController
      */
     public function index()
     {
-        $cities = $this->paginate($this->Cities);
+        $this->viewBuilder()->setLayout('citiesSpa');
+        $cities = $this->Cities->find('all');
+        //$cities = $this->paginate($this->Cities);
 
         $this->set(compact('cities'));
     }
