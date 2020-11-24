@@ -27,6 +27,10 @@ Router::prefix('api', function ($routes) {
     $routes->resources('Cities');
 });
 
+Router::prefix('admin', function (RouteBuilder $route) {
+    $routes->fallbacks(DashedRoute::class);
+});
+
 Router::extensions(['json', 'xml']);
 
 /*

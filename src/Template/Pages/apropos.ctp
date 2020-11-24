@@ -63,6 +63,9 @@
         Lorsque l'utilisateur choisi un groupe, les produits appartenant à ce groupe sont alors affichés.
     </h6>
     <h6>
+        ***Si ça ne marche pas, il faut être dans la vue d'un menu, puis cliquer sur "New Item" pour être redirigé vers les listes liées.*** 
+    </h6>
+    <h6>
         Le bouton du menu "Autocomplete" redirige la page des restaurants. 
         Lorsque l'utilisateur tape un choix de ville, des options sont alors affichées selon les lettres tapées.
     </h6>

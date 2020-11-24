@@ -69,6 +69,12 @@ $cakeDescription = 'Restaurant';
                     <?= $this->Html->link('Español', ['action' => 'changeLang', 'es_ES'], ['escape' => false]);?>
                 </li>
                 <li>
+                    <?= $this->Html->link(__('Autocomplete'), ['controller' => 'Restaurants', 'action' => 'add']) ?>
+                </li>
+                <li>
+                    <?= $this->Html->link(__('Linked Lists'), ['controller' => 'Items', 'action' => 'add']) ?>
+                </li>
+                <li>
                     <?= $this->Html->link(__('Monopage'), ['controller' => 'Cities', 'action' => 'index']) ?>
                 </li>
                 <li>
