@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Controller\AppController;
 
@@ -40,9 +40,7 @@ class CitiesController extends AppController
      */
     public function index()
     {
-        $this->viewBuilder()->setLayout('citiesSpa');
-        $cities = $this->Cities->find('all');
-        //$cities = $this->paginate($this->Cities);
+        $cities = $this->paginate($this->Cities);
 
         $this->set(compact('cities'));
     }
