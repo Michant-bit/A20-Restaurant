@@ -54,6 +54,18 @@
     <h6>
         ***Il faut être dans la vue d'un menu pour ajouter un item à celui-ci***
     </h6>
+    <h6>
+        Le bouton du menu "Monopage" redirige la page vers la page Cities. 
+        L'utilisateur peut alors ajouter, modifier et/ou supprimer une ville. 
+    </h6>
+    <h6>
+        Le bouton du menu "Linked Lists" redirige la page vers les listes reliées. 
+        Lorsque l'utilisateur choisi un groupe, les produits appartenant à ce groupe sont alors affichés.
+    </h6>
+    <h6>
+        Le bouton du menu "Autocomplete" redirige la page des restaurants. 
+        Lorsque l'utilisateur tape un choix de ville, des options sont alors affichées selon les lettres tapées.
+    </h6>
     <br/>
     <h6></h6>
     <hr>
