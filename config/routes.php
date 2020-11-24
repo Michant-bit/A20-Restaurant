@@ -27,7 +27,9 @@ Router::prefix('api', function ($routes) {
     $routes->resources('Cities');
 });
 
-Router::prefix('admin', function (RouteBuilder $route) {
+Router::prefix('admin', function ($routes) {
+    // Toutes les routes ici seront préfixées avec `/admin` et auront
+    // l'élément de route prefix => admin ajouté.
     $routes->fallbacks(DashedRoute::class);
 });
 
