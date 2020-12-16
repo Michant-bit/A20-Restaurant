@@ -6,6 +6,7 @@ use Cake\Network\Exception\UnauthorizedException;
 use Cake\Utility\Security;
 use Firebase\JWT\JWT;
 use Cake\Utility\Text;
+use App\Controller\Api\AppController;
 
 /**
  * Users Controller

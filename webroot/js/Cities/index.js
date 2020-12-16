@@ -1,110 +1,133 @@
-function getCities(){
-    $.ajax({
-        type: 'GET',
-        url: urlToRestApi,
-        dataType: "json",
-        success:
-            function (data) {
-                var cityTable = $('#cityData');
-                cityTable.empty();
-                    $.each(data.cities, function (key, value)
-                    {
-                        var editDeleteButtons = '</td><td>' +
-                                '<a href="javascript:void(0);" class="btn btn-warning" rowID="' +
-                                    value.id + 
-                                    '" data-type="edit" data-toggle="modal" data-target="#modalCityAddEdit">' + 
-                                    'edit</a>' +
-                                '<a href="javascript:void(0);" class="btn btn-danger"' +
-                                    'onclick="return confirm(\'Are you sure to delete data?\') ?' + 
-                                    'cityAction(\'delete\', \'' + 
-                                    value.id + 
-                                    '\') : false;">delete</a>' +
-                                '</td></tr>';
-                        cityTable.append('<tr><td>' + value.id + '</td><td>' + value.name + editDeleteButtons);
-                    });
-            }
-    });
-}
+var app = angular.module('app', []);
 
-function convertFormToJSON(form) {
-    var array = $(form).serializeArray();
-    var json = {};
+app.controller('CityCRUDCtrl', ['$scope', 'CityCRUDService', function ($scope, CityCRUDService) {
 
-    $.each(array, function () {
-        json[this.name] = this.value || '';
-    });
+        $scope.updateCity = function () {
+            CityCRUDService.updateCity($scope.city.id, $scope.city.name)
+                    .then(function success(response) {
+                        $scope.message = 'City data updated!';
+                        $scope.errorMessage = '';
+                        $scope.getAllCities();
+                    },
+                            function error(response) {
+                                $scope.errorMessage = 'Error updating city!';
+                                $scope.message = '';
+                            });
+        }
 
-    return json;
-}
+        $scope.getCity = function (id) {
+            var id = $scope.city.id;
+            CityCRUDService.getCity($scope.city.id)
+                    .then(function success(response) {
+                        $scope.city = response.data.city;
+                        $scope.city.id = id;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.message = '';
+                                if (response.status === 404) {
+                                    $scope.errorMessage = 'City not found!';
+                                } else {
+                                    $scope.errorMessage = "Error getting city!";
+                                }
+                            });
+        }
 
-function cityAction(type, id) {
-    id = (typeof id == "undefined") ? '' : id;
-    var statusArr = {add: "added", edit: "updated", delete: "deleted"};
-    var requestType = '';
-    var cityData = '';
-    var ajaxUrl = urlToRestApi;
-    frmElement = $("#modalCityAddEdit");
-    if (type == 'add') {
-        requestType = 'POST';
-        cityData = convertFormToJSON(frmElement.find('form'));
-    } else if (type == 'edit') {
-        requestType = 'PUT';
-        cityData = convertFormToJSON(frmElement.find('form'));
-    } else {
-        requestType = 'DELETE';
-        ajaxUrl = ajaxUrl + "/" + id;
-    }
-    frmElement.find('.statusMsg').html('');
-    $.ajax({
-        type: requestType,
-        url: ajaxUrl,
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(cityData),
-        success: function (msg) {
-            if (msg) {
-                frmElement.find('.statusMsg').html('<p class="alert alert-success">City data has been ' + statusArr[type] + ' successfully.</p>');
-                getCities();
-                if (type == 'add') {
-                    frmElement.find('form')[0].reset();
-                }
+        $scope.addCity = function () {
+            if ($scope.city != null && $scope.city.name) {
+                CityCRUDService.addCity($scope.city.name)
+                        .then(function success(response) {
+                            $scope.message = 'City added!';
+                            $scope.errorMessage = '';
+                            $scope.getAllCities();
+                        },
+                                function error(response) {
+                                    $scope.errorMessage = 'Error adding city!';
+                                    $scope.message = '';
+                                });
             } else {
-                frmElement.find('.statusMsg').html('<p class="alert alert-danger">Some problem occurred, please try again.</p>');
+                $scope.errorMessage = 'Please enter a name!';
+                $scope.message = '';
             }
         }
-    });
-}
 
-function editCity(id) {
-    $.ajax({
-        type: 'POST',
-        url: 'cityAction.php',
-        dataType: 'JSON',
-        data: 'action_type=data&id=' + id,
-        success: function (data) {
-            $('#id').val(data.id);
-            $('#name').val(data.name);
+        $scope.deleteCity = function () {
+            CityCRUDService.deleteCity($scope.city.id)
+                    .then(function success(response) {
+                        $scope.message = 'City deleted!';
+                        $scope.city = null;
+                        $scope.errorMessage = '';
+                        $scope.getAllCities();
+                    },
+                            function error(response) {
+                                $scope.errorMessage = 'Error deleting city!';
+                                $scope.message = '';
+                            })
         }
-    });
-}
 
-$(function () {
-    $('#modalCityAddEdit').on('show.bs.modal', function (e) {
-        var type = $(e.relatedTarget).attr('data-type');
-        var cityFunc = "cityAction('add');";
-        $('.modal-title').html('Add new city');
-        if (type == 'edit') {
-            cityFunc = "cityAction('edit');";
-            $('.modal-title').html('Edit city');
-            var rowId = $(e.relatedTarget).attr('rowID');
-            editCity(rowId);
+        $scope.getAllCities = function () {
+            CityCRUDService.getAllCities()
+                    .then(function success(response) {
+                        $scope.cities = response.data.cities;
+                        $scope.message = '';
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.message = '';
+                                $scope.errorMessage = 'Error getting cities!';
+                            });
         }
-        $('#citySubmit').attr("onclick", cityFunc);
-    });
 
-    $('#modalCityAddEdit').on('hidden.bs.modal', function () {
-        $('#citySubmit').attr("onclick", "");
-        $(this).find('form')[0].reset();
-        $(this).find('.statusMsg').html('');
-    });
-});
+    }]);
+
+app.service('CityCRUDService', ['$http', function ($http) {
+
+        this.getCity = function getCity(cityId) {
+            return $http({
+                method: 'GET',
+                url: urlToRestApi + '/' + cityId,
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            });
+        }
+
+        this.addCity = function addCity(name) {
+            return $http({
+                method: 'POST',
+                url: urlToRestApi,
+                data: {name: name},
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            });
+        }
+
+        this.deleteCity = function deleteCity(id) {
+            return $http({
+                method: 'DELETE',
+                url: urlToRestApi + '/' + id,
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            })
+        }
+
+        this.updateCity = function updateCity(id, name) {
+            return $http({
+                method: 'PATCH',
+                url: urlToRestApi + '/' + id,
+                data: {name: name},
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            })
+        }
+
+        this.getAllCities = function getAllCities() {
+            return $http({
+                method: 'GET',
+                url: urlToRestApi,
+                headers: { 'X-Requested-With' : 'XMLHttpRequest',
+                    'Accept' : 'application/json'}
+            });
+        }
+
+    }]);
