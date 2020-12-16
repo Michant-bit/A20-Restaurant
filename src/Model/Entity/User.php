@@ -30,6 +30,8 @@ class User extends Entity
         'username' => true,
         'email' => true,
         'password' => true,
+        'uuid' => true,
+        'confirmed' => true,
         'created' => true,
         'modified' => true,
         'menus' => true,

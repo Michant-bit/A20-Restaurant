@@ -4,7 +4,7 @@
             ], ['block' => 'scriptLibraries']
     );
     $urlToLinkedListFilter = $this->Url->build([
-        "controller" => "FoodGroups", // Sinon retourner à la normal
+        "controller" => "FoodGroups", 
         "action" => "getFoodGroups",
         "_ext" => "json"
     ]);
@@ -25,7 +25,7 @@
         <li><?= $this->Html->link(__('New Menu'), ['controller' => 'Menus', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="items form large-9 medium-8 columns content">
+<div class="items form large-9 medium-8 columns content" ng-app="linkedlists" ng-controller="foodGroupsController">
     <?= $this->Form->create($item) ?>
     <fieldset>
         <legend><?= __('Add Item') ?></legend>

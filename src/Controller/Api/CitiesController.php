@@ -17,6 +17,7 @@ class CitiesController extends AppController {
     {
         parent::initialize();
         $this->loadComponent('RequestHandler');
+        $this->Auth->allow(['index']);
     }
 
     public function index()

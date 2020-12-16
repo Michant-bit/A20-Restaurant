@@ -14,7 +14,16 @@ class FoodGroupsController extends AppController
 {
     public function initialize() {
         parent::initialize();
-        $this->Auth->allow(['getByFoodGroup']);
+        $this->Auth->allow(['getFoodGroups', 'getByFoodGroups']);
+    }
+
+    public function getFoodGroups() {
+        $foodGroups = $this->FoodGroups->find('all',
+                ['contain' => ['FoodProducts']]);
+        $this->set([
+            'foodGroups' => $foodGroups,
+            '_serialize' => ['foodGroups']
+        ]);
     }
 
     /**
