@@ -1,4 +1,13 @@
+var onloadCallback = function () {
+    widgetIdl = grecaptcha.render('exemple1', {
+        'sitekey': '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+        'theme': 'light'
+    });
+};
+
 var app = angular.module('app', []);
+
+var urlToRestApiUsers = urlToRestApi.substring(0, urlToRestApi.lastIndexOf('/') + 1) + 'users';
 
 app.controller('CityCRUDCtrl', ['$scope', 'CityCRUDService', function ($scope, CityCRUDService) {
 
@@ -79,6 +88,49 @@ app.controller('CityCRUDCtrl', ['$scope', 'CityCRUDService', function ($scope, C
                             });
         }
 
+        $scope.login = function () {
+            if(grecaptcha.getResponse(widgetIdl) == ' ') {
+                $scope.captcha_status = 'Please verify captcha.';
+                return;
+            }
+            if ($scope.user != null && $scope.user.username) {
+                CityCRUDService.login($scope.user)
+                        .then(function success(response) {
+                            $scope.message = $scope.user.username + ' en session!';
+                            $scope.errorMessage = '';
+                            localStorage.setItem('token', response.data.data.token);
+                            localStorage.setItem('user_id', response.data.data.id);
+                        },
+                                function error(response) {
+                                    $scope.errorMessage = 'Nom d\'utilisateur ou mot de passe invalide...';
+                                    $scope.message = '';
+                                });
+            } else {
+                $scope.errorMessage = 'Entrez un nom d\'utilisateur s.v.p.';
+                $scope.message = '';
+            }
+
+        }
+
+        $scope.logout = function () {
+            localStorage.setItem('token', "no token");
+            localStorage.setItem('user', "no user");
+            $scope.message = '';
+            $scope.errorMessage = 'Utilisateur déconnecté!';
+        }
+
+        $scope.changePassword = function () {
+            CityCRUDService.changePassword($scope.user.password)
+                    .then(function success(response) {
+                        $scope.message = 'Mot de passe mis à jour!';
+                        $scope.errorMessage = '';
+                    },
+                            function error(response) {
+                                $scope.errorMessage = 'Mot de passe inchangé!';
+                                $scope.message = '';
+                            });
+        }
+
     }]);
 
 app.service('CityCRUDService', ['$http', function ($http) {
@@ -130,4 +182,25 @@ app.service('CityCRUDService', ['$http', function ($http) {
             });
         }
 
+        this.login = function login(user) {
+            return $http({
+                method: 'POST',
+                url: urlToRestApiUsers + '/token',
+                data: {username: user.username, password: user.password},
+                headers: {'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'}
+            });
+        }
+
+        this.changePassword = function changePassword(password) {
+            return $http({
+                method: 'PATCH',
+                url: urlToRestApiUsers + '/' + localStorage.getItem("user_id"),
+                data: {password: password},
+                headers: {'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                    'Authorization': 'Bearer ' + localStorage.getItem("token")
+                }
+            })
+        }
     }]);

@@ -1,6 +1,7 @@
 <?php
 echo $this->Html->script([
-    'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js'
+    'https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js',
+    'https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit',
         ], ['block' => 'scriptLibraries']
 );
 $urlToRestApi = $this->Url->build([
@@ -11,6 +12,23 @@ echo $this->Html->script('Cities/index', ['block' => 'scriptBottom']);
 ?>
 
 <div  ng-app="app" ng-controller="CityCRUDCtrl">
+    <div id="example1"></div>
+    <p style="color:red;">{{captcha_status}}</p>
+    <table>
+        <tr>
+            <td width="200">Utilisateur (username):</td>
+            <td><input type="text" id="username" ng-model="user.username" /></td>
+        </tr>
+        <tr>
+            <td width="200">Mot de passe (password):</td>
+            <td><input type="text" id="password" ng-model="user.password" /></td>
+        </tr>
+        <tr>
+        <a ng-click="login(user)">[Connexion] </a>
+        <a ng-click="logout()">[Déconnexion] </a>
+        <a ng-click="changePassword(user.password)">[Changer le mot de passe]</a>              
+        </tr>
+    </table>
     <table>
         <tr>
             <td width="100">ID:</td>
