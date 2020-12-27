@@ -74,6 +74,9 @@ $cakeDescription = 'Restaurant';
                     <?= $this->Html->link(__('Monopage'), ['controller' => 'Cities', 'action' => 'index']) ?>
                 </li>
                 <li>
+                    <?= $this->Html->link(__('Cadriciel AngularJS'), ['controller' => 'Cities', 'action' => 'index']) ?>
+                </li>
+                <li>
                     <?php
                         $loguser = $this->request->getSession()->read('Auth.User');
                         $user = $loguser['username'];

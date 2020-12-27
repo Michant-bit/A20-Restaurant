@@ -69,6 +69,10 @@
         Le bouton du menu "Autocomplete" redirige la page des restaurants. 
         Lorsque l'utilisateur tape un choix de ville, des options sont alors affichées selon les lettres tapées.
     </h6>
+    <h6>
+        Le bouton du menu "Cadriciel AngularJS" redirige la page vers la page Cities.
+        L'utilisateur peut alors chercher une ville avec son ID ou son Nom ou voir toute la liste des villes. 
+    </h6>
     <br/>
     <h6></h6>
     <hr>
